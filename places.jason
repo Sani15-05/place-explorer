@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Taj Mahal",
+        "description": "Famous monument in India",
+        "special": "Symbol of love",
+        "category": "Monument",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/d/da/Taj-Mahal.jpg"
+    },
+    {
+        "name": "Eiffel Tower",
+        "description": "Famous tower in Paris",
+        "special": "Night lights",
+        "category": "Monument",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg"
+    },
+    {
+        "name": "Mount Everest",
+        "description": "Highest mountain in the world",
+        "special": "Climbing peak",
+        "category": "Nature",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/1/12/Mount_Everest.jpg"
+    }
+]
