@@ -17,7 +17,7 @@
         "name": "Mount Everest",
         "description": "Highest mountain in the world",
         "special": "Climbing peak",
-        "category": "Nature",
+        "category": "Mountain",
         "image": "https://upload.wikimedia.org/wikipedia/commons/1/12/Mount_Everest.jpg"
     }
 ]
