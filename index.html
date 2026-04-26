@@ -1,30 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>🌍 Place Explorer</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>🌍 Tourist Place Explorer</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<!-- AOS Animation -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+<!-- Leaflet Map -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
 </head>
+
 <body>
 
-<header>
-    <h1>🌍 Tourist Place </h1>
+<header class="header">
+    <h1 data-aos="fade-down">🌍 Tourist Place Explorer</h1>
 
-    <input type="text" id="search" placeholder="Search any place in the world...">
-    <button id="searchBtn">Search</button>
+    <div class="controls">
+        <input type="text" id="search" placeholder="Search places...">
+        <button id="searchBtn">🔍</button>
 
-    <select id="filter">
-        <option value="all">All</option>
-        <option value="Monument">Monument</option>
-        <option value="Nature">Nature</option>
-        <option value="Beach">Beach</option>
-        <option value="Temple">Temple</option>
-    </select>
+        <select id="filter">
+            <option value="all">All</option>
+            <option value="Monument">Monument</option>
+            <option value="Nature">Nature</option>
+            <option value="Beach">Beach</option>
+        </select>
 
-    <button id="themeToggle">🌙 Dark Mode</button>
+        <button id="themeToggle">🌙</button>
+    </div>
 </header>
 
+<!-- HERO -->
+<section class="hero">
+    <h2>Explore the World 🌎</h2>
+</section>
+
+<!-- LOADER -->
+<div id="loader">Loading...</div>
+
+<!-- CARDS -->
 <div id="places-container"></div>
 
+<!-- MAP -->
+<h2 style="text-align:center;">📍 Map View</h2>
+<div id="map"></div>
+
+<!-- FAVORITES -->
+<h2 style="text-align:center;">❤️ Favorites</h2>
+<div id="favorites"></div>
+
+<footer>
+    <p>✨ Advanced CI/CD Project</p>
+</footer>
+
+<!-- Scripts -->
 <script src="script.js"></script>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+AOS.init();
+</script>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 </body>
 </html>

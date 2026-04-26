@@ -1,86 +1,78 @@
 const container = document.getElementById('places-container');
 const searchInput = document.getElementById('search');
-const filter = document.getElementById('filter');
+const loader = document.getElementById('loader');
+const favoritesDiv = document.getElementById('favorites');
 
-let allPlaces = [];
+let favorites = [];
 
-/* LOAD DEFAULT JSON */
-fetch('places.json')
-.then(res => res.json())
-.then(data => {
-    allPlaces = data;
-    displayPlaces(data);
-});
+/* MAP INIT */
+const map = L.map('map').setView([20, 0], 2);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-/* DISPLAY FUNCTION */
-function displayPlaces(data) {
-    container.innerHTML = '';
+/* DISPLAY */
+function displayPlace(place) {
+    const card = document.createElement('div');
+    card.className = 'card';
 
-    data.forEach(place => {
-        const card = document.createElement('div');
-        card.className = 'card';
+    card.innerHTML = `
+        <img src="${place.image}">
+        <h3>${place.name}</h3>
+        <p>${place.description}</p>
+        <button onclick='addFavorite(${JSON.stringify(place)})'>❤️</button>
+    `;
 
-        card.innerHTML = `
-            <img src="${place.image}">
-            <h2>${place.name}</h2>
-            <p>${place.description}</p>
-            <p><b>Special:</b> ${place.special}</p>
-            <p><b>Category:</b> ${place.category || 'Global'}</p>
-        `;
+    container.appendChild(card);
 
-        container.appendChild(card);
+    /* MAP MARKER */
+    if(place.lat && place.lng){
+        L.marker([place.lat, place.lng]).addTo(map)
+        .bindPopup(place.name);
+    }
+}
+
+/* SEARCH API */
+async function searchPlace() {
+    loader.style.display = "block";
+    container.innerHTML = "";
+
+    const query = searchInput.value;
+
+    const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${query}`);
+    const data = await res.json();
+
+    loader.style.display = "none";
+
+    displayPlace({
+        name: data.title,
+        description: data.extract,
+        image: data.thumbnail ? data.thumbnail.source : "https://via.placeholder.com/300"
     });
 }
 
-/* SEARCH USING WIKIPEDIA API */
-async function searchPlace() {
-    const query = searchInput.value;
-    if (!query) return;
-
-    container.innerHTML = "<p>Loading...</p>";
-
-    try {
-        const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${query}`);
-        const data = await res.json();
-
-        if (data.title && data.extract) {
-            displayPlaces([{
-                name: data.title,
-                description: data.extract,
-                special: "Live data from Wikipedia",
-                category: "Global",
-                image: data.thumbnail ? data.thumbnail.source : "https://via.placeholder.com/300"
-            }]);
-        } else {
-            container.innerHTML = "<p>No results found</p>";
-        }
-
-    } catch {
-        container.innerHTML = "<p>Error fetching data</p>";
-    }
+/* FAVORITES */
+function addFavorite(place) {
+    favorites.push(place);
+    renderFavorites();
 }
 
-/* BUTTON SEARCH */
-document.getElementById('searchBtn').addEventListener('click', searchPlace);
+function renderFavorites() {
+    favoritesDiv.innerHTML = "";
+    favorites.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'card';
+        div.innerHTML = `<h3>${p.name}</h3>`;
+        favoritesDiv.appendChild(div);
+    });
+}
 
-/* ENTER KEY SEARCH */
-searchInput.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        searchPlace();
-    }
-});
+/* EVENTS */
+document.getElementById('searchBtn').onclick = searchPlace;
 
-/* FILTER */
-filter.addEventListener('change', function() {
-    if (this.value === "all") {
-        displayPlaces(allPlaces);
-    } else {
-        const filtered = allPlaces.filter(p => p.category === this.value);
-        displayPlaces(filtered);
-    }
+searchInput.addEventListener('keypress', e => {
+    if(e.key === 'Enter') searchPlace();
 });
 
 /* DARK MODE */
-document.getElementById('themeToggle').addEventListener('click', () => {
+document.getElementById('themeToggle').onclick = () => {
     document.body.classList.toggle('dark');
-});
+};
