@@ -1,74 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>🌍 Tourist Place Explorer</title>
-
-<link rel="stylesheet" href="style.css">
-
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
-<!-- AOS Animation -->
-<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
-<!-- Leaflet Map -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Explorer | Discover Amazing Destinations</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <div class="app-container">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <span class="logo-icon">🌍</span>
+                    <span class="logo-text">Place Explorer</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active" data-category="all">All Places</a>
+                <a href="#" class="nav-link" data-category="beach">🏖️ Beaches</a>
+                <a href="#" class="nav-link" data-category="mountain">⛰️ Mountains</a>
+                <a href="#" class="nav-link" data-category="city">🌆 Cities</a>
+                <a href="#" class="nav-link" data-category="historical">🏛️ Historical</a>
+            </div>
+        </nav>
 
-<header class="header">
-    <h1 data-aos="fade-down">🌍 Tourist Place Explorer</h1>
+        <!-- Hero Section -->
+        <header class="hero">
+            <h1>Discover Your Next Adventure</h1>
+            <p>Explore breathtaking destinations around the world</p>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search for a place...">
+                <button id="searchBtn">🔍 Search</button>
+            </div>
+        </header>
 
-    <div class="controls">
-        <input type="text" id="search" placeholder="Search places...">
-        <button id="searchBtn">🔍</button>
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <div class="stat-box">
+                <div class="stat-number" id="totalPlaces">0</div>
+                <div class="stat-label">Destinations</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="exploredCount">0</div>
+                <div class="stat-label">Explored</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="avgRating">0.0</div>
+                <div class="stat-label">Avg Rating</div>
+            </div>
+        </div>
 
-        <select id="filter">
-            <option value="all">All</option>
-            <option value="Monument">Monument</option>
-            <option value="Nature">Nature</option>
-            <option value="Beach">Beach</option>
-        </select>
+        <!-- Places Grid -->
+        <div class="places-container">
+            <div class="places-grid" id="placesGrid">
+                <!-- Dynamic place cards will appear here -->
+            </div>
+        </div>
 
-        <button id="themeToggle">🌙</button>
+        <!-- Place Details Modal -->
+        <div id="placeModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div id="modalBody"></div>
+            </div>
+        </div>
     </div>
-</header>
 
-<!-- HERO -->
-<section class="hero">
-    <h2>Explore the World 🌎</h2>
-</section>
-
-<!-- LOADER -->
-<div id="loader">Loading...</div>
-
-<!-- CARDS -->
-<div id="places-container"></div>
-
-<!-- MAP -->
-<h2 style="text-align:center;">📍 Map View</h2>
-<div id="map"></div>
-
-<!-- FAVORITES -->
-<h2 style="text-align:center;">❤️ Favorites</h2>
-<div id="favorites"></div>
-
-<footer>
-    <p>✨ Advanced CI/CD Project</p>
-</footer>
-
-<!-- Scripts -->
-<script src="script.js"></script>
-
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script>
-AOS.init();
-</script>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
